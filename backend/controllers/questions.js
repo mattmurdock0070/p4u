@@ -1,15 +1,15 @@
 var userdb = require("../models/questionlist.js");
 
 exports.questions = async (req, res) => {
-    const { name, phone,email,animalname,question } = req.body;
-    if (!name || !phone||!email||!animalname||!question) {
+    const { img,name, phone,email,animalname,question } = req.body;
+    if (!img||!name || !phone||!email||!animalname||!question) {
       res.status(400).json({ error: "fill all details" });
       console.log("None of the fields can be empty");
     }
     try {
       
       const user = new userdb({
-        name, phone,email,animalname,question
+        img,name, phone,email,animalname,question
       });
       const signUp = await user.save();
       if (signUp) {

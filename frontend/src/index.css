@@ -31,7 +31,12 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
+/*new added*/
+html,body{
+max-width: 100%;
+overflow-x: hidden;
+}
+/**/
 input,
 textarea {
     font-family: var(--poppins);
@@ -121,8 +126,8 @@ ul {
 }
 
 .header__user {
-  width: 2.5rem; 
-height: auto;  
+    width: 2.5rem; 
+    height: auto;  
     border: 2px solid black;  
     border-radius: 80%;
 }

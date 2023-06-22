@@ -1,20 +1,20 @@
-// dependencies
+
 import { motion } from "framer-motion";
-import { useEffect, useContext,useState } from "react";
+
 import { useForm,useController  } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from '../assets/logo-no-background.png'
-// components
+
 import Button from "./Button.js";
 import axios from "axios";
-
+import Swal from 'sweetalert2'
 import Header from "./Header";
 const Payment = () => {
 
 	const navigate = useNavigate();
 
 	
-	// destructuring useForm
+	
 	const {
 		register,
 		handleSubmit,
@@ -32,14 +32,21 @@ const Payment = () => {
             amount: Number(data.amount),
             currency: data.currency,
             order_id: data.id,
-            name: 'ADOPET',
+            name: 'Paws4You',
             description: 'Serving pets',
             handler: function (response) {
                 console.log(response, "34")
                 axios.post('http://localhost:5000/verify', { response: response })
                     .then(res => {
                         console.log(res, "37")
-                        // your orders
+                        Swal.fire({
+							title: 'Success!',
+							text: 'Login Successful',
+							icon: 'success',
+							confirmButtonText: 'Success',
+							timer: '2000'
+							})
+							navigate("/userhome");
                     })
                     .catch(err => {
                         console.log(err)
@@ -99,7 +106,7 @@ const Payment = () => {
 					</p>
 				)}
 
-				<Button type="submit" children="Donateee" />
+				<Button type="submit" children="Donate" />
 				
 			</form>
 		</motion.section>

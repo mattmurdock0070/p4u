@@ -1,11 +1,10 @@
-// dependencies
-import { useCallback, useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import { Menu } from '@headlessui/react';
 import Cookies from "universal-cookie";
 import loggedUser from '../assets/usernew.png';
 import Button from './Button';
-
+import Swal from 'sweetalert2'
 import SvgComponent from '../assets/logo-no-background1.png'
 import Spinner from "./Spinner"
 const Header = () => {
@@ -19,7 +18,9 @@ const Header = () => {
   });
 const[page,setpage]=useState("/userhome")
 
-
+useEffect(() => {
+  window.scrollTo(0, 0)
+}, [])
 
 
 
@@ -65,6 +66,14 @@ const[page,setpage]=useState("/userhome")
   const handlelogout = () => {
    
     cookies.remove("jwtoken", { path: "/" });
+    Swal.fire({
+      title: 'Success!',
+      text: 'Logged Out Successfully',
+      icon: 'success',
+      confirmButtonText: 'Success',
+      timer: '2000'
+      })
+
         navigate("/login");
        
   };
@@ -84,7 +93,7 @@ const[page,setpage]=useState("/userhome")
 
   return (
     <>
-    {(isLoading&&(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/perfil' || location.pathname === '/payment'|| location.pathname === '/userhome' || location.pathname === '/home')&&<Spinner/>)||
+    {(isLoading&&(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile' || location.pathname === '/payment'|| location.pathname === '/userhome' || location.pathname === '/pets')&&<Spinner/>)||
     <header className='header'>
       <nav>
         <div>
@@ -92,14 +101,14 @@ const[page,setpage]=useState("/userhome")
           <Link className='header__home' aria-label='Tela inicial' to={page} ></Link>
          
         </div>
-        {(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/perfil'||location.pathname === '/userhome' || location.pathname === '/home')&& 
+        {(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile'||location.pathname === '/userhome' || location.pathname === '/pets')&& 
         
         <Menu>
           <Menu.Button className="menu__button">
             <img className='header__user' src={data.image||loggedUser} alt="Usuário" />
           </Menu.Button>
           <Menu.Items className='menu__content'>
-            <a className='button' href="/perfil">View Profile</a>
+            <a className='button' href="/profile">View Profile</a>
             <Button handleClick={handlelogout} children="Logout"></Button>
           </Menu.Items>
         </Menu>

@@ -1,21 +1,21 @@
-// styles
 import Button from '../Button';
 import React, {  useEffect } from "react";
 import useState from 'react-usestateref'
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-// dependencies
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from "react-hook-form";
 import Header from "../Header";
-
+import Swal from 'sweetalert2'
 import loggedUser from '../../assets/usernew.png';
 
 const Editanimal = (props) => {
   const location = useLocation();
-  // destructuring useForm
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const propsData = location.state;
 
  const [data,setuserdata,ref]=useState(propsData);
@@ -49,7 +49,7 @@ const Editanimal = (props) => {
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+   
       
     }
   };
@@ -114,14 +114,23 @@ const Editanimal = (props) => {
    
     if(dataa.error||dataa.status === 422 || dataa.status===400|| dataa.status===404||dataa.status===500)
     {
-        window.alert("Invalid Registration");
-        console.log("Invalid Registration");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Some Error occurred',
+        icon: 'error',
+        confirmButtonText: 'Retry'
+        })
       } else {
-        window.alert("Successfull Registration");
-        console.log("Successfull Registration");
-        
+        Swal.fire({
+          title: 'Success!',
+          text: 'Update Successful',
+          icon: 'success',
+          confirmButtonText: 'Success',
+          timer: '2000'
+          })
+          navigate("/viewanimal")
       }
-      // Redirect to the login page once the user is registered
+      
      
   
     };

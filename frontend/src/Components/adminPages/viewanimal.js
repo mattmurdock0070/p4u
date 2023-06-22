@@ -1,24 +1,21 @@
-// dependencies
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useState from 'react-usestateref'
 import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
-// assets
-//import { pets } from '../src/data/data.js';
 import Header from "../Header";
-// components
-import CardPet from '../CardPet.js';
 import loggedUser from '../../assets/usernew.png';
 import Cookies from "universal-cookie";
-
+import Swal from 'sweetalert2'
 
 
 
 const Viewanimal = () => {
     const [petsdata,setpetsdata,ref]=useState([{}]);
 
-    
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     const getanimals = async () => {
 
         try {
@@ -80,40 +77,71 @@ const Viewanimal = () => {
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+     
       
     }
   };
 
 
 
-  
+  const handleclick1 =async (elem, idx) => {
+   
+   
+    try {
+      const res = await fetch(`http://localhost:5000/deleteanimal/${elem._id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        
+      });
+     
+      if (res.status === 401) {
+      
+        const error = new Error(res.error);
+        throw error;
+      }
+      Swal.fire({
+				title: 'Success!',
+				text: 'Pet Deleted',
+				icon: 'success',
+				confirmButtonText: 'Success',
+				timer: '2000'
+				})
+      getanimals();
+      
+    } catch (err) {
+      Swal.fire({
+				title: 'Error!',
+				text: 'Deletion Failed',
+				icon: 'error',
+				confirmButtonText: 'Retry'
+				})
+      
+    }
+};
 
   const handleclick =async (elem, idx) => {
-   
-   
-      try {
-        const res = await fetch(`http://localhost:5000/deleteanimal/${elem._id}`, {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          
-        });
-       
-        if (res.status === 401) {
-        
-          const error = new Error(res.error);
-          throw error;
-        }
-        console.log("hello");
-        getanimals();
-        
-      } catch (err) {
-        navigate("/login");
-        
-      }
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm!'
+  }).then((result) => {
+    if (result.dismiss !== 'cancel') {
+
+      handleclick1(elem,idx);
+    }
+  
+})
+
+
   };
 
   useEffect(() => {

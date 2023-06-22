@@ -1,9 +1,10 @@
-// dependencies
+
 import { Link,useNavigate } from 'react-router-dom';
+
 import {  useState ,useEffect} from 'react';
 import { motion } from 'framer-motion';
 import Header from "./Header";
-// hooks and dependencies
+
 import { Helmet } from 'react-helmet';
 import useMediaQuery from '../hooks/useMediaQuery';
 import SvgComponent from '../assets/logo-no-background3.png'
@@ -14,6 +15,13 @@ const Userhome = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const cookies = new Cookies();
+
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const token = cookies.get("jwtoken");
   const login = async () => {
 
@@ -41,7 +49,7 @@ const Userhome = () => {
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+     
       
     }
   };
@@ -65,11 +73,11 @@ const Userhome = () => {
         {matches ? 'Que tal mudar sua vida adotando seu novo melhor amigo? Vem com a gente!' : 'Adopting can change a life. How about picking up your new best friend today? Come with us!'}
       </p>
       <div className='home__buttons'>
-        <Link className='button' to='/home'>View Pets available</Link>
+        <Link className='button' to='/pets'>View Pets available</Link>
         <br>
 
         </br>
-        <br/>
+       
         <Link className='button' to='/payment'>Donate</Link>
         
       </div>

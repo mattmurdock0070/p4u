@@ -1,21 +1,22 @@
-// styles
+
 import Button from './Button';
 import React, {  useEffect } from "react";
 import useState from 'react-usestateref'
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-// dependencies
+
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from "react-hook-form";
 import Header from "./Header";
-// assets
+
 import loggedUser from '../assets/usernew.png';
+import Swal from 'sweetalert2'
 
 
 const Message = () => {
   const location = useLocation();
-  // destructuring useForm
+
 
  const [data,setuserdata,ref]=useState([]);
  
@@ -41,14 +42,14 @@ const Message = () => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+     
       setuserdata(data);
      
       
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+    
       
     }
   };
@@ -86,7 +87,7 @@ const Message = () => {
   const onSubmit = async(data) => {
    
     
-     // console.log("front"+data);
+    
       const _id=ref.current._id;
       const name=ref.current.name;
       const phone=ref.current.phone;
@@ -94,7 +95,7 @@ const Message = () => {
       const message=ref.current.message;
       const image=ref.current.image;
 
-    //   console.log(ref.current);
+    
       const res = await fetch(`http://localhost:5000/editform/${_id}`, {
         method: "PUT",
         headers: {
@@ -114,16 +115,26 @@ const Message = () => {
    
     if(dataa.error||dataa.status === 422 || dataa.status===400|| dataa.status===404||dataa.status===500)
     {
-        window.alert("Invalid Registration");
-        console.log("Invalid Registration");
+      Swal.fire({
+				title: 'Error!',
+				text: 'Please enter valid details',
+				icon: 'error',
+				confirmButtonText: 'Retry'
+				})
       } else {
-        window.alert("Successfull Registration");
-        console.log("Successfull Registration");
-        
+        Swal.fire({
+          title: 'Success!',
+          text: 'Updation Successful',
+          icon: 'success',
+          confirmButtonText: 'Success',
+          timer: '2000'
+          })
+          if(ref.current.usertype==='1')
+          navigate("/adminhome")
+          else
+          navigate("/userhome")
       }
-      // Redirect to the login page once the user is registered
      
-  
     };
 
   return (
@@ -131,31 +142,7 @@ const Message = () => {
    <Header/>
     <motion.section className='message' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
       {
-        location.pathname === '/mensagem'?(
-          <>
-            <p>Send a message to the person or institution that is caring for the animal:</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="name">Name</label>
-              <input id='name'  type="text" {...register("name", {  maxLength: { value: 40, message: 'The maximum number of characters is 25' } })} value={ref.current.name}  placeholder='Enter your full name'  onChange={handleEdit} />
-              {errors.name && <p className="error">{errors.name.message}</p>}
-
-             <label htmlFor="phone">Telephone</label>
-              <input type="tel" id='phone' {...register('phone', { pattern: /\(?[1-9]{2}\)?\s?9?[0-9]{8}/ })} placeholder='Enter your phone number' value={ref.current.phone} onChange={handleEdit} />
-              {errors.phone && <p className="error">{errors.phone.message || 'Please verify the number entered'}</p>}
-
-              <label htmlFor="petName">Name of animal</label>
-              <input id='petName' type="text" {...register("petName", { required: 'It is necessary to inform the name of the animal', maxLength: { value: 25, message: 'O número máximo de caracteres é 25' } })} placeholder='What Animal are you interested in?' />
-              {errors.petName && <p className="error">{errors.petName.message}</p>}
-
-              <label htmlFor="msg">Message</label>
-              <textarea name="msg" id="msg" cols="30" rows="10" {...register('msg', { required: 'It is necessary to write a message', maxLength: { value: 500, message: 'O número máximo de caracteres é 500' } })} placeholder='Enter Your Message.' spellCheck='false'></textarea>
-              {errors.msg && <p className="error">{errors.msg.message}</p>}
-
-              <Button type='submit' children='Submit' />
-            </form>
-          </>
-        ) : (
-          <>
+           <>
            { ref.current.usertype ==='2' && <p>This is the profile that appears to officials or NGOs that receive your message.</p>}
             <form onSubmit={handleSubmit(onSubmit)} >
               <legend>Profile</legend>
@@ -188,10 +175,10 @@ const Message = () => {
               <label htmlFor="about">About</label>
               <textarea spellCheck='false' name="about" id="about" cols="30" rows="8" value={ref.current.message} placeholder='Enter your message or other details you wish to share' {...register('message', {})} onChange={handleEdit}></textarea>
 
-              <Button type='submit' children='Submit' />
+              <Button type='submit' children='UPDATE' />
             </form>
           </>
-        )
+        
       }
     </motion.section>
     </>

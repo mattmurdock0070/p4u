@@ -1,8 +1,7 @@
-// dependencies
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from "./Header";
-// hooks and dependencies
+
 import { Helmet } from 'react-helmet';
 import SvgComponent from '../assets/logo-no-background3.png'
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -20,7 +19,7 @@ const Home = () => {
       <img src={ SvgComponent } alt="Logo " />
       <h3>Welcome!</h3>
       <p>
-        {matches ? 'Que tal mudar sua vida adotando seu novo melhor amigo? Vem com a gente!' : 'Adopting can change a life. How about picking up your new best friend today? Come with us!'}
+        Adopting can change a life. How about picking up your new best friend today? Come with us!
       </p>
       <div className='home__buttons'>
         <Link className='button' to='/login'><b>Login</b></Link>

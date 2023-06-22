@@ -1,24 +1,31 @@
-// dependencies
+
 import { motion } from "framer-motion";
 import { useEffect, useContext,useState } from "react";
 import { useForm,useController  } from "react-hook-form";
 import Cookies from 'universal-cookie'
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-// components
+
 import Button from "./Button.js";
 import Select from 'react-select';
-// contexts
+import Swal from 'sweetalert2'
+
+
 import { AuthContext } from "../contexts/auth.js";
 import SvgComponent from '../assets/logo-no-background.png'
 const cookies = new Cookies();
+const bu=process.env.REACT_APP_BASEURL
 const LoginForm = () => {
-	// destructuring AuthContext
+	
+	
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		console.log(bu)
+		window.scrollTo(0, 0)
+	  }, [])
 	
-	// destructuring useForm
 	const {
 		register,
 		handleSubmit,
@@ -32,12 +39,12 @@ const LoginForm = () => {
 	const onSubmit = async(data) => {
 		
 	    const { email, password,usertype } = data;
-		const res = await fetch("http://localhost:5000/login", {
+		const res = await fetch(`${bu}/login`, {
 		  method: "POST",
 		  headers: {
 			"Content-Type": "application/json",
 		  },
-		  //credentials: 'include',
+		 
 		  body: JSON.stringify({
 			email,
 			password,
@@ -50,15 +57,19 @@ const LoginForm = () => {
 		
 		 cookies.set("jwtoken", dataa.token, {
 			expires: new Date(Date.now() + 25892000000),
-			//httpOnly: true,
 			path: "/",
 		  });
 		  
 		  
 		if (dataa.status === 400 || !dataa || dataa.error) {
-		   window.alert("inSuccessfull login");
-        console.log("inSuccessfull login");
-			
+		  
+				Swal.fire({
+				title: 'Error!',
+				text: 'Please enter valid credentials',
+				icon: 'error',
+				confirmButtonText: 'Retry'
+				})
+           		
 		
 		} else {
 			console.log(usertype);
@@ -66,8 +77,13 @@ const LoginForm = () => {
 			navigate("/userhome");
 			else
 			navigate("/adminhome")
-		    window.alert("Successfull login");
-        console.log("Successfull login");
+			Swal.fire({
+				title: 'Success!',
+				text: 'Login Successful',
+				icon: 'success',
+				confirmButtonText: 'Success',
+				timer: '2000'
+				})
 		
 		}
 		

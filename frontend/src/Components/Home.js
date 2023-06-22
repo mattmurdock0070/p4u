@@ -1,25 +1,17 @@
-// dependencies
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useState from 'react-usestateref'
 import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-// assets
-//import { pets } from '../src/data/data.js';
-
-// components
-
-
 import Cookies from "universal-cookie";
-
-
-
 
 const Viewanimal = () => {
     const [petsdata,setpetsdata,ref]=useState([{}]);
 
-    
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     const getanimals = async () => {
 
         try {
@@ -76,20 +68,22 @@ const Viewanimal = () => {
       }
       
       const data = await res.json();
-      //console.log(data);
+
       
       
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+     
       
     }
   };
 
 
 
-  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
      
 

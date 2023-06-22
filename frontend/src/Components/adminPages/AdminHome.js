@@ -1,17 +1,13 @@
-// dependencies
 import React, { useEffect } from "react";
 import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
-// assets
-import { pets } from '../../data/data.js';
+
 import { Link } from 'react-router-dom';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
 import Header from "../Header";
-// hooks and dependencies
+import useState from 'react-usestateref'
 import { Helmet } from 'react-helmet';
 import SvgComponent from '../../assets/logo-no-background3.png'
-// components
-import CardPet from '../CardPet.js';
 
 import Cookies from "universal-cookie";
 
@@ -21,6 +17,10 @@ const AdminHome = () => {
   const matches = useMediaQuery('(max-width: 767px)');
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const [data,setuserdata,ref]=useState([]);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const token = cookies.get("jwtoken");
   const login = async () => {
 
@@ -41,13 +41,12 @@ const AdminHome = () => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
-     
-      
+      setuserdata(data);
+    
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
+   
       
     }
   };
@@ -59,6 +58,7 @@ const AdminHome = () => {
 
   return (
     <>
+    {ref.current.usertype==="2"&&navigate("/login")}
     <Header/>
     
     <motion.section className='initial' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
@@ -68,7 +68,7 @@ const AdminHome = () => {
     <img src={ SvgComponent }  alt="Logo " />
     <h3>Hello Admin!</h3>
     <p>
-      {matches ? 'Que tal mudar sua vida adotando seu novo melhor amigo? Vem com a gente!' : 'What do you want to do?'}
+     'What do you want to do?
     </p>
     <div className='home__buttons'>
       <Link className='button' to='/viewanimal'>View Animal List</Link>

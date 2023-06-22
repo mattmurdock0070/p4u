@@ -1,7 +1,7 @@
-// components
+
 import Button from "./Button";
 
-// dependencies / hooks
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm,useController  } from "react-hook-form";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import Header from "./Header";
 import SvgComponent from '../assets/logo-no-background.png'
-
+import Swal from 'sweetalert2'
 const RegisterForm = () => {
 	const navigate = useNavigate();
 	const [visiblePassword, setVisiblePassword] = useState({
@@ -51,12 +51,17 @@ console.log(skey);
 	  ];
 	  const { field: { value: langValue, onChange: langOnChange, ...restLangField } } = useController({ name: 'usertype', control });
 
-	const onSubmit = async(data) => {
+	const onSubmit = async(data) => { 
 	console.log(data);
     //data.preventDefault();
-    if(langValue=="1"&&skey!="SUMITAGARWAL")
+    if(langValue=="1"&&skey!=process.env.REACT_APP_SECRET_KEY)
 	{
-		window.alert("Invalid secret key");
+		Swal.fire({
+			title: 'Error!',
+			text: 'Invalid Secret Key ',
+			icon: 'error',
+			confirmButtonText: 'Retry'
+			})
 		
 	}
 	else{
@@ -78,14 +83,24 @@ console.log(skey);
 	const dataa = await res.json();
  
     if (dataa.status === 400 || !dataa|| dataa.error) {
-      window.alert("Invalid Registration");
-      console.log("Invalid Registration");
+		Swal.fire({
+			title: 'Error!',
+			text: 'Some Error occurred',
+			icon: 'error',
+			confirmButtonText: 'Retry'
+			})
     } else {
-      window.alert("Successfull Registration");
-      console.log("Successfull Registration");
+		Swal.fire({
+			title: 'Success!',
+			text: 'Registration Successful',
+			icon: 'success',
+			confirmButtonText: 'Success',
+			timer: '2000'
+			})
+			navigate("/login");
     }
-    // Redirect to the login page once the user is registered
-    navigate("/login");
+    
+   
 }
   };
 
@@ -108,17 +123,6 @@ console.log(skey);
 			<form onSubmit={handleSubmit(onSubmit)}>
 			
 
-
-
-             
-
-
-
-
-
-
-
-		
       <label>Select Role</label>
       <Select
         className='select-input'

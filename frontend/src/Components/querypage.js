@@ -1,21 +1,21 @@
-// styles
+
 import Button from './Button';
 import React, {  useEffect } from "react";
 import useState from 'react-usestateref'
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-// dependencies
+
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from "react-hook-form";
 import Header from "./Header";
+import Swal from 'sweetalert2'
 
-// assets
-import loggedUser from '../assets/logged-user.png';
+
 
 const Querypage = (props) => {
   const location = useLocation();
-  // destructuring useForm
+
 
   const propsData = location.state;
   
@@ -51,8 +51,7 @@ const Querypage = (props) => {
     } catch (err) {
       navigate("/login");
       
-     // console.log(err);
-      
+    
     }
   };
 
@@ -82,7 +81,7 @@ const Querypage = (props) => {
       const phone=ref.current.phone;
       const animalname=data.animalname;
       const question=data.question;
-
+      const img=ref.current.image;
     
      const res = await fetch("http://localhost:5000/questionpost", {
         method: "POST",
@@ -90,6 +89,7 @@ const Querypage = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          img:img,
           name: name,
           phone: phone,
           email:email,
@@ -103,16 +103,24 @@ const Querypage = (props) => {
    
     if(dataa.error||dataa.status === 422 || dataa.status===400|| dataa.status===404||dataa.status===500)
     {
-        window.alert("Invalid Registration");
-        console.log("Invalid Registration");
+      Swal.fire({
+				title: 'Error!',
+				text: 'There eas some error',
+				icon: 'error',
+				confirmButtonText: 'Retry'
+				})
       } else {
-        window.alert("Successfull Registration");
-        console.log("Successfull Registration");
+        Swal.fire({
+          title: 'Success!',
+          text: 'Messege Sent Successfully',
+          icon: 'success',
+          confirmButtonText: 'Success',
+          timer: '2000'
+          })
+          navigate("/pets")
         
       }
-      // Redirect to the login page once the user is registered
      
-    navigate("/home");
     };
 
   return (
@@ -150,7 +158,7 @@ const Querypage = (props) => {
               <textarea name="question" id="question" cols="30" rows="10" {...register('question', { required: 'It is necessary to write a message', maxLength: { value: 500, message: 'Maximum digits can be 500' } })} placeholder='Enter your message' spellCheck='false'></textarea>
               {errors.question && <p className="error">{errors.question.message}</p>}
 
-              <Button type='submit' children='Submit' />
+              <Button type='submit' children='SEND' />
             </form>
           </>
         

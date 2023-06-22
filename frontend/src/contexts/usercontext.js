@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
     email: null,
 
 	});
-	console.log("from thfhytjyauthservice");
+	
 	const cookies = new Cookies();
 	const token = cookies.get("jwtoken");
 	useEffect(() => {
