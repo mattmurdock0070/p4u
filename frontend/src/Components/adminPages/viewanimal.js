@@ -8,7 +8,7 @@ import loggedUser from '../../assets/usernew.png';
 import Cookies from "universal-cookie";
 import Swal from 'sweetalert2'
 
-
+const bu=process.env.REACT_APP_BASEURL
 
 const Viewanimal = () => {
     const [petsdata,setpetsdata,ref]=useState([{}]);
@@ -19,7 +19,7 @@ const Viewanimal = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch("http://localhost:5000/getanimals", {
+          const res = await fetch(`${bu}/getanimals`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -35,7 +35,7 @@ const Viewanimal = () => {
           }
           const data = await res.json();
           setpetsdata(data);
-          console.log(ref.current);
+        
           
           
         } catch (err) {
@@ -55,7 +55,7 @@ const Viewanimal = () => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -71,7 +71,7 @@ const Viewanimal = () => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+ 
       
       
     } catch (err) {
@@ -88,7 +88,7 @@ const Viewanimal = () => {
    
    
     try {
-      const res = await fetch(`http://localhost:5000/deleteanimal/${elem._id}`, {
+      const res = await fetch(`${bu}/deleteanimal/${elem._id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -152,6 +152,7 @@ const Viewanimal = () => {
 
   return (
     <>
+      {ref.current.usertype==="2"&&navigate("/login")}
        <Header/>
   
     <motion.section className='home' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>

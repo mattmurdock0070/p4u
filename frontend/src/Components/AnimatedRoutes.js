@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
-
 import { AuthProvider } from "../contexts/auth";
 
 import Initial from './Initial';

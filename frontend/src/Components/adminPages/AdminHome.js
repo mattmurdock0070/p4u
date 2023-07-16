@@ -11,7 +11,7 @@ import SvgComponent from '../../assets/logo-no-background3.png'
 
 import Cookies from "universal-cookie";
 
-
+const bu=process.env.REACT_APP_BASEURL
 
 const AdminHome = () => {
   const matches = useMediaQuery('(max-width: 767px)');
@@ -25,7 +25,7 @@ const AdminHome = () => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",

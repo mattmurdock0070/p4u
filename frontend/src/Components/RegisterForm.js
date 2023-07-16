@@ -10,6 +10,7 @@ import Select from 'react-select';
 import Header from "./Header";
 import SvgComponent from '../assets/logo-no-background.png'
 import Swal from 'sweetalert2'
+const bu=process.env.REACT_APP_BASEURL
 const RegisterForm = () => {
 	const navigate = useNavigate();
 	const [visiblePassword, setVisiblePassword] = useState({
@@ -28,7 +29,7 @@ const[skey,setskey]=useState("1");
 
 const handlesc=(e)=>{
 setskey(e.target.value);
-console.log(skey);
+
 }
 	
 
@@ -52,8 +53,7 @@ console.log(skey);
 	  const { field: { value: langValue, onChange: langOnChange, ...restLangField } } = useController({ name: 'usertype', control });
 
 	const onSubmit = async(data) => { 
-	console.log(data);
-    //data.preventDefault();
+	
     if(langValue=="1"&&skey!=process.env.REACT_APP_SECRET_KEY)
 	{
 		Swal.fire({
@@ -67,7 +67,7 @@ console.log(skey);
 	else{
     const { name, email, password ,usertype} = data;
 	
-    const res = await fetch("http://localhost:5000/register", {
+    const res = await fetch(`${bu}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -209,7 +209,7 @@ console.log(skey);
 					</p>
 				)}
 
-				<label htmlFor="pass-confirm">Confirme sua senha</label>
+				<label htmlFor="pass-confirm">Confirm Password</label>
 				<span>
 					<span
 						onClick={() => handlePasswordType("passwordRetry")}

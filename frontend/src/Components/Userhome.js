@@ -1,22 +1,21 @@
 
 import { Link,useNavigate } from 'react-router-dom';
-
-import {  useState ,useEffect} from 'react';
+import useState from 'react-usestateref'
+import {  useEffect} from 'react';
 import { motion } from 'framer-motion';
 import Header from "./Header";
 
 import { Helmet } from 'react-helmet';
-import useMediaQuery from '../hooks/useMediaQuery';
 import SvgComponent from '../assets/logo-no-background3.png'
-import Spinner from "./Spinner"
 import Cookies from "universal-cookie";
+const bu=process.env.REACT_APP_BASEURL
 const Userhome = () => {
-  const matches = useMediaQuery('(max-width: 767px)');
+  
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const cookies = new Cookies();
 
-
+  const [data,setuserdata,ref]=useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -26,7 +25,7 @@ const Userhome = () => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -42,7 +41,7 @@ const Userhome = () => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+     setuserdata(data)
       setIsLoading(false)   
      
       
@@ -61,7 +60,7 @@ const Userhome = () => {
  
   return (
     <>
-  
+    {ref.current.usertype==="1"&&navigate("/login")}
    <Header/>
     <motion.section className='initial' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
       <Helmet>
@@ -70,7 +69,7 @@ const Userhome = () => {
       <img src={SvgComponent} alt="Logo AdoPet" />
       <h3>Welcome!</h3>
       <p>
-        {matches ? 'Que tal mudar sua vida adotando seu novo melhor amigo? Vem com a gente!' : 'Adopting can change a life. How about picking up your new best friend today? Come with us!'}
+       Adopting can change a life. How about picking up your new best friend today? Come with us!
       </p>
       <div className='home__buttons'>
         <Link className='button' to='/pets'>View Pets available</Link>

@@ -806,23 +806,12 @@ legend {
     .header > nav > .menu__content {
         right: 10.125rem;
     }
-    /*
-
-  .footer__img {
-    width: 21rem;
-    margin: 2.5rem auto -2.5rem;
-  }
-*/
+   
     .initial,
     .register {
         padding-top: 2.25rem;
     }
-    /*
-  .initial img,
-  .register img {
-    height: 3.875rem;
-    margin-bottom: 2.5rem;
-  } */
+
 
     .initial p {
         width: 30.5rem;
@@ -889,15 +878,7 @@ legend {
         gap: 1rem;
     }
 
-    /*
-  div.card {
-    width: fit-content;
-    margin: 0;
-  }
-
-  .message button {
-    max-width: 10.25rem;
-  } */
+  
 }
 /* #endregion */
 @keyframes spinner {

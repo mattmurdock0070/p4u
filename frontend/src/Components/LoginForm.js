@@ -22,7 +22,7 @@ const LoginForm = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(bu)
+	
 		window.scrollTo(0, 0)
 	  }, [])
 	
@@ -53,7 +53,7 @@ const LoginForm = () => {
 		});
 	
 		const dataa = await res.json();
-         console.log(dataa.token);
+         
 		
 		 cookies.set("jwtoken", dataa.token, {
 			expires: new Date(Date.now() + 25892000000),
@@ -72,7 +72,7 @@ const LoginForm = () => {
            		
 		
 		} else {
-			console.log(usertype);
+		
 			if(usertype=="2")
 			navigate("/userhome");
 			else
@@ -157,7 +157,7 @@ const languageList = [
 				/>
 				{errors.email && (
 					<p className="error">
-						{errors.email.message || "Por favor, verifique o email digitado"}
+						{errors.email.message }
 					</p>
 				)}
 

@@ -46,12 +46,7 @@ exports.register = async (req, res) => {
       
       if (emailExists && PassMatch) {
         const token = await emailExists.generateAuthToken();
-       /* res.cookie("jwtoken", token, {
-          expires: new Date(Date.now() + 25892000000),
-          httpOnly: true,
-        });
-        console.log(req.cookie+"yjguj")
-        console.log("Login  Success");*/
+
         res.json({token });
       } 
       else {

@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b7686243.css",
+    "main.js": "/static/js/main.524ef263.js",
+    "static/media/logo-no-background.png": "/static/media/logo-no-background.13ac4622b1c2871b797c.png",
+    "static/media/logo-no-background3.png": "/static/media/logo-no-background3.017f9b70b561b6f486e2.png",
+    "static/media/paws.svg": "/static/media/paws.877b1a66cab4e854155a.svg",
+    "static/media/paws-1.svg": "/static/media/paws-1.3b33e43603d6f76f68c2.svg",
+    "static/media/usernew.png": "/static/media/usernew.a6143582309785dca610.png",
+    "static/media/logo-no-background1.png": "/static/media/logo-no-background1.d680b31c8c38120cc32c.png",
+    "static/media/eye-hover.svg": "/static/media/eye-hover.d406583ffb8c2392c7a7.svg",
+    "static/media/eye.svg": "/static/media/eye.f0bb48628b0020428c43.svg",
+    "static/media/message-hover.svg": "/static/media/message-hover.8bf6812df3982c713fa0.svg",
+    "static/media/message.svg": "/static/media/message.1e071d03a9ac2a20ff1a.svg",
+    "index.html": "/index.html",
+    "static/media/messages-hover.svg": "/static/media/messages-hover.835473b61285b89bf9f8.svg",
+    "static/media/messages.svg": "/static/media/messages.8cf1c08ee563b16cd217.svg",
+    "static/media/body-bg.svg": "/static/media/body-bg.6ab984c5581ec202baf7.svg",
+    "static/media/header-bg.svg": "/static/media/header-bg.e854072dbc7eb5182e89.svg",
+    "static/media/home-hover.svg": "/static/media/home-hover.784362a2c895e11f7ebd.svg",
+    "static/media/home.svg": "/static/media/home.4311efdad0af6f596aa9.svg",
+    "main.b7686243.css.map": "/static/css/main.b7686243.css.map",
+    "main.524ef263.js.map": "/static/js/main.524ef263.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b7686243.css",
+    "static/js/main.524ef263.js"
+  ]
+}

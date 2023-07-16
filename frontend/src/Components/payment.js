@@ -1,18 +1,58 @@
 
 import { motion } from "framer-motion";
-
+import {  useEffect} from 'react';
+import useState from 'react-usestateref'
 import { useForm,useController  } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from '../assets/logo-no-background.png'
-
+import Cookies from "universal-cookie";
 import Button from "./Button.js";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import Header from "./Header";
+const bu=process.env.REACT_APP_BASEURL
 const Payment = () => {
 
 	const navigate = useNavigate();
+	const cookies = new Cookies();
 
+	const [data,setuserdata,ref]=useState([]);
+	const token = cookies.get("jwtoken");
+  const login = async () => {
+
+    try {
+      const res = await fetch(`${bu}/afterlogin`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        
+      });
+     
+      if (res.status === 401) {
+      
+        const error = new Error(res.error);
+        throw error;
+      }
+      const data = await res.json();
+     setuserdata(data)
+     
+     
+      
+    } catch (err) {
+      navigate("/login");
+      
+     
+      
+    }
+  };
+
+  useEffect(() => {
+    login();
+    
+  }, []);
 	
 	
 	const {
@@ -35,10 +75,10 @@ const Payment = () => {
             name: 'Paws4You',
             description: 'Serving pets',
             handler: function (response) {
-                console.log(response, "34")
-                axios.post('http://localhost:5000/verify', { response: response })
+               
+                axios.post(`${bu}/verify`, { response: response })
                     .then(res => {
-                        console.log(res, "37")
+                      
                         Swal.fire({
 							title: 'Success!',
 							text: 'Login Successful',
@@ -49,7 +89,7 @@ const Payment = () => {
 							navigate("/userhome");
                     })
                     .catch(err => {
-                        console.log(err)
+                      
                     })
             }
 
@@ -62,19 +102,20 @@ const Payment = () => {
 	   const onSubmit = (data) => {
 		const {amount}=data;
         const _data = { amount: amount }
-        axios.post('http://localhost:5000/orders', _data)
+        axios.post(`${bu}/orders`, _data)
             .then(res => {
-                console.log(res.data, "29")
+              
                 handleOpenRazorpay(res.data.data)
             })
             .catch(err => {
-                console.log(err)
+               
             })
     }
 
 
 	return (
 		<>
+		{ref.current.usertype==="1"&&navigate("/login")}
 			<Header/>
 		
 		<motion.section
@@ -95,14 +136,14 @@ const Payment = () => {
 					id="amount"
 					type="Number"
 					{...register("amount", {
-						required: "É necessário informar um endereço de email",
+						required: "An amount is required",
 						
 					})}
 					placeholder="0.0"
 				/>
 				{errors.amount && (
 					<p className="error">
-						{errors.amount.message || "Por favor, verifique o email digitado"}
+						{errors.amount.message }
 					</p>
 				)}
 

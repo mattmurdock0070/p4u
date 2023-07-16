@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 
 import Header from "../Header";
 import Swal from 'sweetalert2'
-
+const bu=process.env.REACT_APP_BASEURL
 const Responses = () => {
     const [petsdata,setpetsdata,ref]=useState([{}]);
 
@@ -15,7 +15,7 @@ const Responses = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch("http://localhost:5000/getquestions", {
+          const res = await fetch(`${bu}/getquestions`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -31,7 +31,7 @@ const Responses = () => {
           }
           const data = await res.json();
           setpetsdata(data);
-          console.log(ref.current);
+          
           
           
         } catch (err) {
@@ -54,7 +54,7 @@ const Responses = () => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -70,7 +70,7 @@ const Responses = () => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+     
       
       
     } catch (err) {
@@ -89,7 +89,7 @@ const Responses = () => {
    
    
       try {
-        const res = await fetch(`http://localhost:5000/deletequestion/${elem._id}`, {
+        const res = await fetch(`${bu}/deletequestion/${elem._id}`, {
           method: "DELETE",
           headers: {
             Accept: "application/json",
@@ -155,6 +155,7 @@ const Responses = () => {
 
   return (
     <>
+      {ref.current.usertype==="2"&&navigate("/login")}
        <Header/>
    
     <motion.section className='home' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>

@@ -46,8 +46,7 @@ export const UserProvider = ({ children }) => {
 				  
 				
 			  } catch (err) {
-				console.log(err);
-               // navigate("/login");
+				
 				
 				
 			  }

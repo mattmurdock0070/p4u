@@ -7,6 +7,7 @@ import Button from './Button';
 import Swal from 'sweetalert2'
 import SvgComponent from '../assets/logo-no-background1.png'
 import Spinner from "./Spinner"
+const bu=process.env.REACT_APP_BASEURL
 const Header = () => {
   const location = useLocation();
   
@@ -32,7 +33,7 @@ useEffect(() => {
    
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -48,8 +49,7 @@ useEffect(() => {
         throw error;
       }
       const dataa = await res.json();
-      console.log("dataa");
-      console.log(data);
+      
       setdata(dataa);
       setIsLoading(false)   
       if(dataa.usertype === '1')
@@ -65,7 +65,7 @@ useEffect(() => {
 
   const handlelogout = () => {
    
-    cookies.remove("jwtoken", { path: "/" });
+    cookies.remove("jwtoken", {path: '/'});
     Swal.fire({
       title: 'Success!',
       text: 'Logged Out Successfully',

@@ -5,17 +5,17 @@ import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Cookies from "universal-cookie";
-
+const bu=process.env.REACT_APP_BASEURL
 const Viewanimal = () => {
     const [petsdata,setpetsdata,ref]=useState([{}]);
-
+    const [data,setuserdata,reef]=useState([]);
     useEffect(() => {
       window.scrollTo(0, 0)
     }, [])
     const getanimals = async () => {
 
         try {
-          const res = await fetch("http://localhost:5000/getanimals", {
+          const res = await fetch(`${bu}/getanimals`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -31,7 +31,7 @@ const Viewanimal = () => {
           }
           const data = await res.json();
           setpetsdata(data);
-          console.log(ref.current);
+        
           
           
         } catch (err) {
@@ -51,7 +51,7 @@ const Viewanimal = () => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -68,7 +68,7 @@ const Viewanimal = () => {
       }
       
       const data = await res.json();
-
+      setuserdata(data)
       
       
     } catch (err) {
@@ -95,6 +95,7 @@ const Viewanimal = () => {
 
   return (
     <>
+      {reef.current.usertype==="1"&&navigate("/login")}
     <Header/>
     <motion.section className='home' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
       <p>Hello!<br /> See friends available for adoption!</p>

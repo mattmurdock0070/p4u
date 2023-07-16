@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Header from "../Header";
-
+const bu=process.env.REACT_APP_BASEURL
 const Userdetail = (props) => {
   const location = useLocation();
   
@@ -26,7 +26,7 @@ const Userdetail = (props) => {
   const login = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/afterlogin", {
+      const res = await fetch(`${bu}/afterlogin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -42,7 +42,7 @@ const Userdetail = (props) => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+  
       setuserdata(data);
      
       
@@ -58,7 +58,7 @@ const Userdetail = (props) => {
   const getaboutuser = async () => {
 
     try {
-      const res = await fetch("http://localhost:5000/getuser", {
+      const res = await fetch(`${bu}/getuser`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -79,7 +79,7 @@ const Userdetail = (props) => {
         throw error;
       }
       const data = await res.json();
-      console.log(data);
+     
       setmyuserdata(data);
      
       
@@ -102,6 +102,7 @@ const Userdetail = (props) => {
   
   return (
     <>
+      {ref.current.usertype==="2"&&navigate("/login")}
        <Header/>
    
     <motion.section className='message' initial={{ width: 0 }} animate={{ width: "auto", transition: { duration: 0.5 } }} exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
