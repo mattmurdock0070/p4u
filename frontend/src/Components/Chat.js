@@ -38,7 +38,7 @@ const Chat = () => {
     const [input, setInput] = useState('');
     const socket = useRef(null);
     useEffect(() => {
-        socket.current = io('${bu}');
+        socket.current = io('https://paws-4-you-2.onrender.com');
         socket.current.on('connect', () => {
           //  console.log('Socket.IO connected');
         });

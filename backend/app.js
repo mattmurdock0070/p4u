@@ -185,7 +185,7 @@ const app = express();
 const http = require('http').createServer(app); 
 const io = require('socket.io')(http, {
   cors: {
-    origin: "https://paws4you.netlify.app/",
+    origin: "https://6697aaf52f071a9e067b7f14--delightful-crepe-a5b7f5.netlify.app/",
     methods: ["GET", "POST"]
   }
 });
