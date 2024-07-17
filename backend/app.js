@@ -281,7 +281,7 @@ redisClient.on("error", (error) => {
           console.log("Data not found in Redis cache");
           // If data is not cached, fetch it from MongoDB using the controller function and cache it in Redis
           const result = await fetchQuestions(); // Call the controller function to fetch data from MongoDB
-          await redisClient.setEx("cachedData", 3600, JSON.stringify(result)); // Cache data for 1 hour
+          await redisClient.setEx("cachedData", 30, JSON.stringify(result)); // Cache data for 1 hour
           return res.json(result);
         }
       } catch (error) {
@@ -304,7 +304,7 @@ redisClient.on("error", (error) => {
           console.log("Data not found in Redis cache");
           // If data is not cached, fetch it from MongoDB using the controller function and cache it in Redis
           const result = await fetchAnimals(); // Call the controller function to fetch data from MongoDB
-          await redisClient.setEx("animaldata", 3600, JSON.stringify(result)); // Cache data for 1 hour
+          await redisClient.setEx("animaldata", 30, JSON.stringify(result)); // Cache data for 1 hour
           return res.json(result);
         }
       } catch (error) {
