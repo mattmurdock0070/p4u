@@ -190,11 +190,7 @@ const io = require('socket.io')(http, {
   }
 });
 
-app.use(cors({
-  origin: "https://6697aaf52f071a9e067b7f14--delightful-crepe-a5b7f5.netlify.app",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+
 
 
 const mongoose = require("mongoose");
@@ -223,7 +219,11 @@ app.get("/", (req, res) => {
 app.use(morgan("tiny"));
 
 // Create a new Redis client with authentication
-
+app.use(cors({
+  origin: "https://6697aaf52f071a9e067b7f14--delightful-crepe-a5b7f5.netlify.app",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL,
