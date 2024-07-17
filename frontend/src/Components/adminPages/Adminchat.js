@@ -46,7 +46,7 @@ const Adminchat = () => {
     const socket = useRef(null);
 
     useEffect(() => {
-        socket.current = io('http://localhost:5000');
+        socket.current = io('${bu}');
 
         socket.current.on('connect', () => {
            // console.log('Socket.IO connected');
