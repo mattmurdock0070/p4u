@@ -80,6 +80,11 @@ const AdminHome = () => {
       <Link className='button' to='/responses'>See Responses</Link>
       
     </div>
+    <div className='home__buttons'>
+      <Link className='button' to='/Adminchat'>Connect to Users</Link>
+    </div>
+
+      
   </motion.section >
   </>
   );

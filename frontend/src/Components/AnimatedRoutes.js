@@ -12,21 +12,23 @@ import AdminHome from "./adminPages/AdminHome"
 import Editanimal from "./adminPages/editanimal"
 import Addanimal from "./adminPages/addanimal"
 import Viewanimal from "./adminPages/viewanimal"
+import Adminchat from "./adminPages/Adminchat"
 import Querypage from "./querypage";
 import Payment from "./payment";
 import Responses from "./adminPages/responses"
 import Userdetail from "./adminPages/getuserdetails.js"
 import Userhome from "./Userhome.js";
+import Chat from "./Chat.js"; // Import the Chat component
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
-  
+  // Check if the current route is '/chat'
+  const isChatRoute = location.pathname === '/chat'||location.pathname === '/Adminchat';
 
   return (
     <AnimatePresence exitBeforeEnter>
       <AuthProvider>
-        
         <Routes location={location} key={location.pathname}>
           <Route exact path='/' element={<Initial />} />
           <Route path='/login' element={<LoginForm />} />
@@ -42,8 +44,11 @@ const AnimatedRoutes = () => {
           <Route path='/payment' element={<Payment/>} />
           <Route path='/getuserdetail' element={<Userdetail/>} />
           <Route path='/userhome' element={<Userhome/>} />
+          <Route path='/chat' element={<Chat />} /> 
+          <Route path='/Adminchat' element={<Adminchat />} /> 
         </Routes>
-        <Footer />
+        {/* Render the footer only if the current route is not '/chat' */}
+        {!isChatRoute && <Footer />}
       </AuthProvider>
     </AnimatePresence>
   );

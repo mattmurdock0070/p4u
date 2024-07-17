@@ -15,7 +15,7 @@ const Responses = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch(`${bu}/getquestions`, {
+          const res = await fetch(`${bu}/datafromredis`, {
             method: "GET",
             headers: {
               Accept: "application/json",

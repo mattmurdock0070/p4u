@@ -78,6 +78,12 @@ const Userhome = () => {
         </br>
        
         <Link className='button' to='/payment'>Donate</Link>
+
+        <br>
+
+        </br>
+
+        <Link className='button' to='/chat'>Connect with our team</Link>
         
       </div>
     </motion.section >

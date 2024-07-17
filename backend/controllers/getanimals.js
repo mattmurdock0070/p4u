@@ -3,6 +3,8 @@ var userdb = require("../models/animallist.js");
 
 
   exports.getanimals = async (req, res) => {
+
+    
     try {
      
       userdb.find()
@@ -23,6 +25,17 @@ var userdb = require("../models/animallist.js");
       console.log(err);
     }
   };
+
+
+  async function fetchAnimals() {
+    try {
+      const data = await userdb.find();
+      return data;
+    } catch (err) {
+      console.error("Error fetching questions from MongoDB:", err);
+      throw new Error("Error fetching questions from MongoDB");
+    }
+  }
   
 
   exports.deleteanimal = async (req, res) => {
@@ -46,4 +59,4 @@ var userdb = require("../models/animallist.js");
       console.log(err);
     }
   };
-  
+  exports.fetchAnimals = fetchAnimals;

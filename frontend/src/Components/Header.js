@@ -7,6 +7,7 @@ import Button from './Button';
 import Swal from 'sweetalert2'
 import SvgComponent from '../assets/logo-no-background1.png'
 import Spinner from "./Spinner"
+
 const bu=process.env.REACT_APP_BASEURL
 const Header = () => {
   const location = useLocation();
@@ -93,7 +94,7 @@ useEffect(() => {
 
   return (
     <>
-    {(isLoading&&(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile' || location.pathname === '/payment'|| location.pathname === '/userhome' || location.pathname === '/pets')&&<Spinner/>)||
+    {(isLoading&&(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile' || location.pathname === '/payment'|| location.pathname === '/userhome' || location.pathname === '/pets'|| location.pathname === '/chat')&&<Spinner/>)||
     <header className='header'>
       <nav>
         <div>
@@ -101,7 +102,7 @@ useEffect(() => {
           <Link className='header__home' aria-label='Tela inicial' to={page} ></Link>
          
         </div>
-        {(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile'||location.pathname === '/userhome' || location.pathname === '/pets')&& 
+        {(location.pathname === '/querypage'||data.usertype === '1'||location.pathname === '/profile'||location.pathname === '/userhome' || location.pathname === '/pets'|| location.pathname === '/chat')&& 
         
         <Menu>
           <Menu.Button className="menu__button">

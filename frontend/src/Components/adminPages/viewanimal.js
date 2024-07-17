@@ -19,7 +19,7 @@ const Viewanimal = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch(`${bu}/getanimals`, {
+          const res = await fetch(`${bu}/getanimaldatafromredis`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -39,7 +39,7 @@ const Viewanimal = () => {
           
           
         } catch (err) {
-          navigate("/login");
+          //navigate("/login");
           
         }
       };

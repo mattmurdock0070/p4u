@@ -15,7 +15,7 @@ const Viewanimal = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch(`${bu}/getanimals`, {
+          const res = await fetch(`${bu}/getanimaldatafromredis`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -108,7 +108,7 @@ const Viewanimal = () => {
             <ul>
               <li>{pet.age}</li>
               <li>{pet.size}</li>
-              <li>{pet.behavior}</li>
+              <li>{pet.behaviour}</li>
                 
               </ul>
             
