@@ -190,6 +190,9 @@ const io = require('socket.io')(http, {
   }
 });
 
+const path = require("path");
+const _dirname = path.dirname("")
+const buildpath = path.join(_dirname,"../frontend/build")
 
 
 
@@ -209,6 +212,7 @@ app.use(cors());
 mongoose.set("strictQuery", true);
 dotenv.config({ path: "./.env" });
 app.use(express.static("public"));
+app.use(express.static(buildpath));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));

@@ -42,7 +42,7 @@ exports.register = async (req, res) => {
         return res.status(400).json({ error: "None of the feilds can be empty" });
       }
       const emailExists = await userdb.findOne({ email: email,usertype:usertype});
-      const PassMatch = await userdb.findOne({ password: password });
+      const PassMatch = await userdb.findOne({  email: email,password: password });
       
       if (emailExists && PassMatch) {
         const token = await emailExists.generateAuthToken();
@@ -56,6 +56,9 @@ exports.register = async (req, res) => {
       console.log(err);
     }
   };
+
+
+  
   exports.getuser= async (req, res) => {
 
 
