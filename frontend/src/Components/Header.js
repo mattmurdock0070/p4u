@@ -109,7 +109,7 @@ useEffect(() => {
             <img className='header__user' src={data.image||loggedUser} alt="Usuário" />
           </Menu.Button>
           <Menu.Items className='menu__content'>
-            <a className='button' href="/profile">View Profile</a>
+            <Link className='button' to="/profile">View Profile</Link>
             <Button handleClick={handlelogout} children="Logout"></Button>
           </Menu.Items>
         </Menu>

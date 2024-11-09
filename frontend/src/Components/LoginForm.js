@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { useEffect, useContext,useState } from "react";
 import { useForm,useController  } from "react-hook-form";
@@ -186,7 +187,7 @@ const languageList = [
 				
 				<Button type="submit" children="Enter" />
 				<p>Don't have an account yet?</p>
-				<a href="/register" className="register__newUser">Make your registration</a>
+				<Link to="/register" className="register__newUser">Make your registration</Link>
 			</form>
 		</motion.section>
 		</>
