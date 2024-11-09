@@ -185,7 +185,8 @@ const app = express();
 const http = require('http').createServer(app); 
 const io = require('socket.io')(http, {
   cors: {
-    origin: "https://paws4you.netlify.app",
+   // origin: "https://paws4you.netlify.app",
+    origin: "http://ec2-3-93-191-218.compute-1.amazonaws.com:5000",
     methods: ["GET", "POST"]
   }
 });
@@ -217,6 +218,19 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
+/*
+app.use((req, res, next) => {
+  if (/(.ico|.js|.css|.jpg|.png|.map)$/i.test(req.path)) {
+      next();
+  } else {
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      res.header('Expires', '-1');
+      res.header('Pragma', 'no-cache');
+      res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  }
+});
+*/
+
 app.get("/", (req, res) => {
   res.send("BackEnd");
 });
@@ -224,7 +238,8 @@ app.use(morgan("tiny"));
 
 // Create a new Redis client with authentication
 app.use(cors({
-  origin: "https://paws4you.netlify.app",
+  // origin: "https://paws4you.netlify.app",
+  origin: "http://ec2-3-93-191-218.compute-1.amazonaws.com:5000",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));

@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 const UserContext = createContext();
 
+const bu = process.env.REACT_APP_BASEURL
+
 export const UserProvider = ({ children }) => {
 
 	const navigate = useNavigate();
@@ -20,7 +22,7 @@ export const UserProvider = ({ children }) => {
 			
 
 			try {
-						const res = await fetch("http://localhost:5000/afterlogin", {
+						const res = await fetch(`${bu}/afterlogin`, {
 				method: "GET",
 				headers: {
 				Accept: "application/json",
