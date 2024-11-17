@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       {location.pathname === '/' && <img className="footer__img" src="pets.svg" alt="" aria-hidden='true' />}
       <footer className="footer">
-        <p>Developed by <a href="https://sumitportfolio2003.netlify.app/" target='_blank' rel="noreferrer">Sumit Agarwal</a>.</p>
+        <p>Developed by Sumit Agarwal, Aayush Singh and Gautam Kr. Jha.</p>
       </footer>
     </>
   );

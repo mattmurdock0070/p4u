@@ -15,7 +15,7 @@ const Viewanimal = () => {
     const getanimals = async () => {
 
         try {
-          const res = await fetch(`${bu}/getanimaldatafromredis`, {
+          const res = await fetch(`${bu}/getanimals`, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -56,7 +56,7 @@ const Viewanimal = () => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization:`Bearer ${token}`,
         },
         
       });
@@ -125,3 +125,6 @@ const Viewanimal = () => {
 };
 
 export default Viewanimal;
+
+
+
